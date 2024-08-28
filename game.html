@@ -11,10 +11,11 @@
 </head>
 
 <body>
-    <div style="text-align: center; border: 1px solid white; margin-top: 20px;">
+    <div style="text-align: center; border-bottom: 3px solid #8A3CBA; padding-top: 15px; padding-bottom: 10px; background-color: whitesmoke;">
         <h2 id="score"> Score：0 </h2>
     </div>
     <div id="ground">
+        <div id="board" style="z-index: 1;"></div>
         <div class="snakepart" id="snake" style="display: none;"></div>
         <div id="food" class="d-none"></div>
     </div>
@@ -23,14 +24,18 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content" style="background-color: white   ;">
                 <div class="modal-header">
-                    <h2 class="modal-title" id="exampleModalLabel" style="color: #8A3CBA">Snake imbriago</h2>
+                    <h2 class="modal-title" id="exampleModalLabel" style="color: #8A3CBA; font-weight: 700;">Snake imbriago</h2>
                 </div>
-                <div class="modal-body" id="corpoModal" style="background-color: whitesmoke; text-align: center; font-weight: 600; font-size: x-large;">
+                <div class="modal-body" id="corpoModal"
+                    style="background-color: whitesmoke; text-align: center; font-weight: 600; font-size: x-large;">
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" onclick="window.location.href='home.htlm'" data-bs-dismiss="modal">Exit</button>
-                    <button type="button" onclick="location.reload()" style="background-color: #8A3CBA; border: 1px solid #8A3CBA;" class="btn btn-primary">Retry</button>
+                    <button type="button" class="btn btn-lg btn-secondary" onclick="window.location.href='home.htmL'"
+                        data-bs-dismiss="modal">Exit</button>
+                    <button type="submit" id="retryButton" onclick="location.reload()"
+                        style="background-color: #8A3CBA; border: 1px solid #8A3CBA;"
+                        class="btn btn-lg btn-primary">Retry</button>
                 </div>
             </div>
         </div>
@@ -49,7 +54,14 @@
     <script src="script.js"></script>
 
     <script>
-       
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const retryButton = document.getElementById('retryButton');
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    retryButton.click();
+                }
+            });
+        });
     </script>
 
 </body>

@@ -1,3 +1,32 @@
+let board = document.getElementById('board');
+
+for (let i = 1; i <= 25; i++) {
+    const cellContainer = document.createElement('div');
+    cellContainer.className = 'cellContainer';
+    for (let j = 1; j <= 25; j++) {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        if (i % 2 == 0) {
+            if (j % 2 == 0) {
+                cell.style.backgroundColor = '#f2f2f2';
+            } else {
+                cell.style.backgroundColor = 'white';
+            }
+        } else {
+            if (j % 2 == 0) {
+                cell.style.backgroundColor = 'white';
+            } else {
+                cell.style.backgroundColor = '#f2f2f2';
+            }
+        }
+
+        cellContainer.append(cell);
+    }
+    board.append(cellContainer);
+}
+
+
+
 let up = false;
 let down = false;
 let right = true;
@@ -44,12 +73,27 @@ function foodGen() {
     fY = Math.trunc(fY);
     fX = Math.random() * 99;
     fX = Math.trunc(fX);
-    if ((fX % 2) == 1) {
-        fX = fX + 1;
+
+    if (fX % 4 == 1) {
+        fX -= 1;
     }
-    if ((fY % 2) == 1) {
-        fY = fY + 1;
+    if (fX % 4 == 2) {
+        fX -= 2;
     }
+    if (fX % 4 == 3) {
+        fX += 1;
+    }
+
+    if (fY % 4 == 1) {
+        fY -= 1;
+    }
+    if (fY % 4 == 2) {
+        fY -= 2;
+    }
+    if (fY % 4 == 3) {
+        fY += 1;
+    }
+
     food.classList.remove('d-none');
     food.style.top = `${fY}%`;
     food.style.left = `${fX}%`;
@@ -61,9 +105,9 @@ let X;
 let Y;
 
 snakeParts = [];
-head = { x: 30, y: 50 };
-part1 = { x: 28, y: 50 };
-part2 = { x: 26, y: 50 };
+head = { x: 40, y: 52 };
+part1 = { x: 36, y: 52 };
+part2 = { x: 32, y: 52 };
 snakeParts.push(head);
 snakeParts.push(part1);
 snakeParts.push(part2);
@@ -71,7 +115,7 @@ snakeParts.push(part2);
 let score = document.getElementById('score');
 let scoreCounter = 0;
 
-let movement = 2;
+let movement = 4;
 
 function moveSnake() {
 
@@ -110,7 +154,7 @@ function moveSnake() {
 
 const snake = document.getElementById('snake');
 const ground = document.getElementById('ground');
-let delay = 100;
+let speed = 80;  // speed of the snake (lower is faster)
 
 function showSnake() {
 
@@ -145,7 +189,7 @@ function showSnake() {
     if (alive) {
         setTimeout(() => {
             moveSnake();
-        }, delay);
+        }, speed);
     } else {
         modalContent = document.getElementById('corpoModal');
         modalContent.innerHTML = 'You have lost! <br> Your score is: ' + scoreCounter;

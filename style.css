@@ -1,32 +1,54 @@
-html, body {
+html,
+body {
     height: 90%;
     width: 100%;
     margin: 0;
     padding: 0;
+    background: url('bg_snake.jpg') no-repeat center center fixed;
+    background-size: cover;
 }
 
 #ground {
-    border: 1px solid black;
+    border: 3px solid #8A3CBA;
     position: absolute;
     left: 50%;
-    top: 50%; 
-    min-width: 43%; 
-    min-height: 80%; 
-    background-color: lightgray;
+    top: 55%;
+    width: 43%;
+    height: 80%;
     transform: translate(-50%, -50%);
+}
+
+#board {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.cellContainer {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.cell {
+    width: 100%;
+    height: 100%;
+    border: 0.1px solid white;
 }
 
 #snake {
     position: absolute;
-    width: 2%;
-    height: 2%;
+    width: 4%;
+    height: 4%;
     background-color: #6CBB3C;
 }
 
 #food {
     position: absolute;
-    width: 2%;
-    height: 2%;
+    width: 4%;
+    height: 4%;
     background-color: #8A3CBA;
     border-radius: 100%;
+    border: 1px solid black;
 }
