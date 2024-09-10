@@ -169,7 +169,7 @@ function moveSnake() {
 
 const snake = document.getElementById('snake');
 const ground = document.getElementById('ground');
-let speed;  // speed of the snake (lower is faster)
+let speed = 80;  // speed of the snake (lower is faster)
 
 function setDiff(v) {
     switch (v) {
