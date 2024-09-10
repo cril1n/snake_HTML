@@ -4,6 +4,10 @@ if (localStorage.getItem('recordH') === null) {
     localStorage.setItem('recordE', 0);
 }
 
+if (sessionStorage.getItem('speed') === null) { 
+    localStorage.setItem('speed', 80);
+}
+
 
 function chessboard() {
     let board = document.getElementById('board');
@@ -165,7 +169,38 @@ function moveSnake() {
 
 const snake = document.getElementById('snake');
 const ground = document.getElementById('ground');
-let speed = 80;  // speed of the snake (lower is faster)
+let speed;  // speed of the snake (lower is faster)
+
+function setDiff(v) {
+    switch (v) {
+        case 'h':
+            sessionStorage.setItem('speed', 50);
+            document.getElementById('hardDiff').style.fontWeight = 800;
+            document.getElementById('midDiff').style.fontWeight = 400;
+            document.getElementById('easDiff').style.fontWeight = 400;
+            break;
+        case 'm':
+            sessionStorage.setItem('speed', 80);
+            document.getElementById('hardDiff').style.fontWeight = 400;
+            document.getElementById('midDiff').style.fontWeight = 800;
+            document.getElementById('easDiff').style.fontWeight = 400;
+            break;
+        case 'e':
+            sessionStorage.setItem('speed', 110);
+            document.getElementById('hardDiff').style.fontWeight = 400;
+            document.getElementById('midDiff').style.fontWeight = 400;
+            document.getElementById('easDiff').style.fontWeight = 800;
+            break;
+        default:
+            break;
+    }
+}
+
+if (sessionStorage.getItem('speed') !== null) {
+    speed = sessionStorage.getItem('speed');
+}
+
+
 let counter = 0;
 
 function showSnake() {
@@ -216,6 +251,7 @@ function showSnake() {
 
 
 function gameOver() {
+    ground.innerHTML = '';
     modalContent = document.getElementById('corpoModalMain');
     modalContent.innerHTML = 'Game over! <br> You have scored ' + scoreCounter;
     if (speed == 50) {
@@ -238,6 +274,12 @@ function gameOver() {
     }
     var modal1 = new bootstrap.Modal(document.getElementById('MainModal'));
     modal1.show();
+}
+
+function resumeGame() {
+    modal.hide();
+    pause = false;
+    moveSnake();
 }
 
 
