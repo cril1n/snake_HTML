@@ -1,15 +1,13 @@
-html,
-body {
-    height: 90%;
+html {
+    height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
-    background: url('bg_snake.jpg') no-repeat center center fixed;
-    background-size: cover;
+    background-color: lightgray;
 }
 
 #ground {
-    border: 3px solid #8A3CBA;
+    border: 4px solid #8A3CBA;
     position: absolute;
     left: 50%;
     top: 55%;
@@ -34,7 +32,7 @@ body {
 .cell {
     width: 100%;
     height: 100%;
-    border: 0.1px solid white;
+    border: 0.1px solid whitesmoke;
 }
 
 #snake {
@@ -42,13 +40,24 @@ body {
     width: 4%;
     height: 4%;
     background-color: #6CBB3C;
+    border-radius: 20%;
+}
+
+.head {
+    position: absolute;
+    width: 4%;
+    height: 4%;
+    background: url('head.png') no-repeat center center fixed;
+    background-size: cover
+    /*
+    background-color: #0d7f00;
+    border-radius: 20%;*/
 }
 
 #food {
     position: absolute;
     width: 4%;
     height: 4%;
-    background-color: #8A3CBA;
-    border-radius: 100%;
-    border: 1px solid black;
+    background: url('beer.svg') no-repeat center center fixed;
+    background-size: cover;
 }

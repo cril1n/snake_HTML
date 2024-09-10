@@ -1,29 +1,39 @@
-let board = document.getElementById('board');
-
-for (let i = 1; i <= 25; i++) {
-    const cellContainer = document.createElement('div');
-    cellContainer.className = 'cellContainer';
-    for (let j = 1; j <= 25; j++) {
-        const cell = document.createElement('div');
-        cell.className = 'cell';
-        if (i % 2 == 0) {
-            if (j % 2 == 0) {
-                cell.style.backgroundColor = '#f2f2f2';
-            } else {
-                cell.style.backgroundColor = 'white';
-            }
-        } else {
-            if (j % 2 == 0) {
-                cell.style.backgroundColor = 'white';
-            } else {
-                cell.style.backgroundColor = '#f2f2f2';
-            }
-        }
-
-        cellContainer.append(cell);
-    }
-    board.append(cellContainer);
+if (localStorage.getItem('recordH') === null) {
+    localStorage.setItem('recordH', 0);
+    localStorage.setItem('recordM', 0);
+    localStorage.setItem('recordE', 0);
 }
+
+
+function chessboard() {
+    let board = document.getElementById('board');
+
+    for (let i = 1; i <= 25; i++) {
+        const cellContainer = document.createElement('div');
+        cellContainer.className = 'cellContainer';
+        for (let j = 1; j <= 25; j++) {
+            const cell = document.createElement('div');
+            cell.className = 'cell';
+            if (i % 2 == 0) {
+                if (j % 2 == 0) {
+                    cell.style.backgroundColor = '#f0f0f0';
+                } else {
+                    cell.style.backgroundColor = 'whitesmoke';
+                }
+            } else {
+                if (j % 2 == 0) {
+                    cell.style.backgroundColor = 'whitesmoke';
+                } else {
+                    cell.style.backgroundColor = '#f0f0f0';
+                }
+            }
+
+            cellContainer.append(cell);
+        }
+        board.append(cellContainer);
+    }
+}
+
 
 
 
@@ -32,6 +42,7 @@ let down = false;
 let right = true;
 let left = false;
 let alive = true;
+let pause = false;
 
 document.addEventListener('keydown', function (event) {
     switch (event.key) {
@@ -99,7 +110,7 @@ function foodGen() {
     food.style.left = `${fX}%`;
 }
 
-foodGen();
+
 
 let X;
 let Y;
@@ -155,6 +166,7 @@ function moveSnake() {
 const snake = document.getElementById('snake');
 const ground = document.getElementById('ground');
 let speed = 80;  // speed of the snake (lower is faster)
+let counter = 0;
 
 function showSnake() {
 
@@ -163,8 +175,14 @@ function showSnake() {
         element.remove();
     });
 
+    counter = 0;
     snakeParts.forEach(part => {
         clone = snake.cloneNode(true);
+        if (counter == 0) {
+            clone.removeAttribute('id');
+            clone.classList.add('head');
+            counter++;
+        }
         clone.style.top = `${part.y}%`;
         clone.style.left = `${part.x}%`;
         clone.style.display = '';
@@ -186,22 +204,42 @@ function showSnake() {
         }
     }
 
-    if (alive) {
+    if (alive && !pause) {
         setTimeout(() => {
             moveSnake();
         }, speed);
-    } else {
-        modalContent = document.getElementById('corpoModal');
-        modalContent.innerHTML = 'You have lost! <br> Your score is: ' + scoreCounter;
-        var modal1 = new bootstrap.Modal(document.getElementById('MainModal'));
-        modal1.show();
+    } else if (!alive) {
+        gameOver();
     }
 
 }
 
 
+function gameOver() {
+    modalContent = document.getElementById('corpoModalMain');
+    modalContent.innerHTML = 'Game over! <br> You have scored ' + scoreCounter;
+    if (speed == 50) {
+        if (scoreCounter > localStorage.getItem('recordH')) {
+            localStorage.setItem('recordH', scoreCounter);
+        }
+        modalContent.innerHTML += '<br> The record on hard is ' + localStorage.getItem('recordH') + ' points';
+    }
+    if (speed == 80) {
+        if (scoreCounter > localStorage.getItem('recordM')) {
+            localStorage.setItem('recordM', scoreCounter);
+        }
+        modalContent.innerHTML += '<br> The record on medium is ' + localStorage.getItem('recordM') + ' points';
+    }
+    if (speed == 110) {
+        if (scoreCounter > localStorage.getItem('recordE')) {
+            localStorage.setItem('recordE', scoreCounter);
+        }
+        modalContent.innerHTML += '<br> The record on easy is ' + localStorage.getItem('recordE') + ' points';
+    }
+    var modal1 = new bootstrap.Modal(document.getElementById('MainModal'));
+    modal1.show();
+}
 
-showSnake();
 
 
 
