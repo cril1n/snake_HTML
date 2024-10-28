@@ -1,0 +1,19 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    margin: 100px;
+    background-color: whitesmoke;
+    width: 85%;
+    height: 85%;
+    border-radius: 1%;
+}

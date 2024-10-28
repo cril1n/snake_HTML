@@ -1,0 +1,63 @@
+html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: lightgray;
+}
+
+#ground {
+    border: 4px solid #8A3CBA;
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    width: 43%;
+    height: 80%;
+    transform: translate(-50%, -50%);
+}
+
+#board {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.cellContainer {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.cell {
+    width: 100%;
+    height: 100%;
+    border: 0.1px solid whitesmoke;
+}
+
+#snake {
+    position: absolute;
+    width: 4%;
+    height: 4%;
+    background-color: #6CBB3C;
+    border-radius: 20%;
+}
+
+.head {
+    position: absolute;
+    width: 4%;
+    height: 4%;
+    background: url('head.png') no-repeat center center fixed;
+    background-size: cover
+    /*
+    background-color: #0d7f00;
+    border-radius: 20%;*/
+}
+
+#food {
+    position: absolute;
+    width: 4%;
+    height: 4%;
+    background: url('beer.svg') no-repeat center center fixed;
+    background-size: cover;
+}
